@@ -78,13 +78,18 @@ app.get("/year/:year", async (req, res, next) => {
 app.get(
   "/",
   catchAsync(async (req, res, next) => {
-    let now = new Date();
+    const now = new Date();
+    const year = now.getFullYear();
+    req.sql = `SELECT e.Name, e.Startdate, p.PerformerName, s.Name 
+    FROM Events e 
+    INNER JOIN Performer p
+    USING(PerformerID)
+    INNER JOIN Stage s
+    USING (StageID)
+    WHERE DATE_FORMAT(e.Startdate, '%Y') = ${year}`;
+    const result = await dbControler.request(req, res, next);
 
-    res.status(200).render("default", {
-      year: now.getFullYear(),
-      years: req.years,
-      data: [],
-    });
+    res.status(200).render("years", { year, years: req.years, data: result });
   })
 );
 
