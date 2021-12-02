@@ -1,0 +1,168 @@
+html {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  /* background-image: url(/img/fon.jpg); */
+  background: url(/img/fon.jpg) center/cover no-repeat fixed;
+  /* background-position: center top;
+  background-size: 100% auto;
+  background-repeat: no-repeat; */
+  padding: 0;
+  margin: 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+/* Menu styling */
+header {
+  background: #000044;
+  margin: 0px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 6vh;
+  font-size: 1.2em;
+  padding-top: 5px;
+}
+
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 2em;
+  margin: auto;
+  float: right;
+}
+
+header li,
+header div {
+  display: inline;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+/* header li {
+  margin: 10px;
+} */
+
+header div {
+  margin: 15px;
+}
+
+header li,
+header a {
+  text-align: center;
+  text-decoration: none;
+  margin: 20px;
+  font-weight: 300;
+  color: white;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+#contact {
+  cursor: pointer;
+}
+
+#selYear {
+  background: none;
+  border: 0px;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 0.85em;
+  font-weight: 300;
+  font-variant-numeric: proportional-nums;
+  color: white;
+}
+
+#selYear option,
+#selYear select {
+  font-size: 0.75em;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+option {
+  line-height: 20px;
+  color: black;
+}
+
+.flex-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#left-container {
+  width: 30%;
+  height: calc(80%);
+}
+
+#right-container {
+  width: 60%;
+  height: auto;
+}
+
+#dates,
+#stages,
+#right-container {
+  border-radius: 10px;
+  background-color: #ffffff99;
+}
+
+#dates,
+#right-container {
+  margin: 0 2%;
+}
+
+#stages {
+  margin: 20px 2% 0 2%;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin: 5px;
+}
+h1 {
+  color: #000044;
+  font-weight: 800;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+#dates,
+#stages {
+  width: 100%;
+}
+
+.items:hover {
+  color: darkblue;
+  cursor: pointer;
+}
+
+.active {
+  color: darkblue;
+}
+
+#contacts {
+  color: #000044;
+  background-color: #fffa;
+  width: 80%;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.invalid {
+  color: red;
+}
+
+.valid {
+  color: green;
+}

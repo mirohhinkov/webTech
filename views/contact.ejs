@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <header><%- include('header'); %></header>
+
+    <h1>Contact Us</h1>
+    <div class="flex-container">
+      <div id="contacts">
+        <form>
+          <label for="name">Your Name</label><br />
+          <input id="name" type="text" required />
+          <span id="name-status" class="invalid"></span>
+          <br />
+          <label for="email">Your e-mail</label><br />
+          <input id="email" type="email" required />
+          <span id="email-status" class="invalid"></span>
+          <br />
+          <label for="message">Your query</label><br />
+          <textarea
+            id="message"
+            name="message"
+            rows="10"
+            cols="50"
+            placeholder="Type your message here"
+          ></textarea>
+          <span id="msg-status" class="invalid"></span>
+          <br />
+          <button id="submit">Submit</button>
+        </form>
+        <p id="status" class="valid"></p>
+      </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

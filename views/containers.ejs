@@ -1,0 +1,27 @@
+<% let s = 0, d = 0, e = 0 %>
+<div id="element-container" class="flex-container">
+  <div id="left-container">
+    <div id="dates">
+      <h2>Dates</h2>
+      <% for (let el of data) { %>
+      <p id="<%= 'd-' + d %>" class="items" <% d++ %>
+        ><%= new Intl.DateTimeFormat('en-GB', {minute: 'numeric', hour:
+        'numeric', day: 'numeric', month: 'long', year:
+        'numeric'}).format(el.Startdate) %>
+      </p>
+      <% } %>
+    </div>
+    <div id="stages">
+      <h2>Stages</h2>
+      <% for (let el of data) { %>
+      <p id="<%= 's-' + s %>" <% s++ %>class="items"><%= el.Name %></p>
+      <% } %>
+    </div>
+  </div>
+  <div id="right-container">
+    <h2>Events</h2>
+    <% for (let el of data) { %>
+    <p id="<%= 'e-' + e %>" <% e++ %>class="items"><%= el.PerformerName %></p>
+    <% } %>
+  </div>
+</div>
