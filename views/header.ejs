@@ -1,18 +1,22 @@
-<ul>
-  <li>
-    <div id="menu">
-      <select name="selYear" id="selYear">
-        <option id="current-year" value="" selected disabled hidden>
-          <%= year || 'Select a year' %>
-        </option>
-        <% for (let year of years) { %>
-        <option value="<%=  year %>"><%= year %></option>
+<nav>
+  <ul id="menu">
+    <li class="header-text"><a href="/">Home</a></li>
+    <li>
+      <div id="menu">
+        <select name="selYear" id="selYear">
+          <option id="current-year" value="" selected disabled hidden>
+            <%= year || 'Select a year' %>
+          </option>
+          <% for (let year of years) { %>
+          <option value="<%=  year %>"><%= year %></option>
 
-        <% } %>
-      </select>
-    </div>
-  </li>
-  <li><a href="/faq">FAQ</a></li>
-  <li id="contact">Contact</li>
-  <li><a href="/about">About</a></li>
-</ul>
+          <% } %>
+        </select>
+      </div>
+    </li>
+
+    <li id="faq">FAQ</li>
+    <li id="contact">Contact</li>
+    <li id="about">About</li>
+  </ul>
+</nav>
