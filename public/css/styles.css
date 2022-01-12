@@ -2,9 +2,15 @@ html {
   margin: 0px;
   padding: 0px;
 }
+
 body {
   /* background-image: url(/img/fon.jpg); */
-  background: url(/img/fon.jpg) center/cover no-repeat fixed;
+  background-image: linear-gradient(#0007, #0007), url(/img/fon.jpg); /* center/cover no-repeat fixed; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* height: 100vh; */
   /* background-position: center top;
   background-size: 100% auto;
   background-repeat: no-repeat; */
@@ -19,7 +25,7 @@ select:focus {
 }
 /* Menu styling */
 header {
-  background: #000044;
+  /* background: #000044; */
   margin: 0px;
   position: relative;
   left: 0px;
@@ -64,7 +70,13 @@ header a {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
-#contact {
+.hidden {
+  display: none;
+}
+
+#contact,
+#faq,
+#about {
   cursor: pointer;
 }
 
@@ -91,22 +103,26 @@ header a {
 option {
   line-height: 20px;
   color: black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 .flex-container {
   display: flex;
   align-content: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 #left-container {
   width: 30%;
   height: calc(80%);
+  text-align: center;
 }
 
 #right-container {
   width: 60%;
   height: auto;
+  text-align: center;
 }
 
 #dates,
@@ -114,6 +130,8 @@ option {
 #right-container {
   border-radius: 10px;
   background-color: #ffffff99;
+  padding-bottom: 1px;
+  padding-top: 1px;
 }
 
 #dates,

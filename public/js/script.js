@@ -1,34 +1,101 @@
 console.log("Front script");
-// const locations = JSON.parse(document.getElementById('map').dataset.locations);
+
+// Common variables
+
+const activeStages = [];
+const activeDates = [];
+
 //Helpers
 
 const validateEmail = (mail) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
 
-const getYearUrl = () => {
-  const year = document.getElementById("current-year").innerHTML.trim();
-  console.log(year);
+const getYearUrl = (e) => {
+  const year =
+    document.getElementById("selYear").selectedOptions[0].value ||
+    document.getElementById("current-year").innerHTML.trim();
   url = `/year/${year}`;
-  console.log(url);
   return url;
+};
+
+// Shows
+const showFilteredEvents = () => {
+  let stages = [];
+  let days = [];
+  if (activeStages.length) {
+    stages = activeStages.map((el) => document.getElementById(el).innerText);
+  } else {
+    const items = document.getElementById("stages").childNodes;
+    items.forEach((el) => {
+      if (el.className && el.className.includes("items"))
+        stages.push(document.getElementById(el.id).innerText);
+    });
+  }
+  if (activeDates.length) {
+    days = activeDates.map(
+      (el) => document.getElementById(el).innerText.split(" ")[0]
+    );
+  } else {
+    const items = document.getElementById("dates").childNodes;
+    items.forEach((el) => {
+      if (el.className && el.className.includes("items")) {
+        days.push(document.getElementById(el.id).innerText.split(" ")[0]);
+      }
+    });
+  }
+
+  const items = document.getElementById("right-container").childNodes;
+  items.forEach((el) => {
+    if (el.className && el.className.includes("items")) {
+      const data = JSON.parse(document.getElementById(el.id).dataset.events);
+      const date = new Date(data.Startdate).getDate();
+      document.getElementById(el.id).classList.add("hidden");
+
+      if (stages.indexOf(data.Name) != -1 && days.indexOf(`${date}`) != -1)
+        document.getElementById(el.id).classList.remove("hidden");
+    }
+  });
 };
 
 // Listeners
 
-const listHandler = () => {
+const listHandler = (e) => {
   url = getYearUrl();
+  console.log(url);
   window.location.href = url;
 };
 
-const containerHandler = (e) => {
-  console.log("Clicked");
-  console.log(e.target.id);
-  document.getElementById(e.target.id).classList.add("active");
+const datesHandler = (e) => {
+  if (!e.target.id) return;
+  dateDiv = document.getElementById(e.target.id);
+  if (activeDates.indexOf(e.target.id) == -1) {
+    dateDiv.classList.add("active");
+    activeDates.push(e.target.id);
+  } else {
+    dateDiv.classList.remove("active");
+    activeDates.splice(activeDates.indexOf(e.target.id), 1);
+  }
+  showFilteredEvents();
 };
 
-const contactHandler = () => {
-  year = document.getElementById("current-year").innerHTML.trim();
-  url = `/contact/${year}`;
+const stagesHandler = (e) => {
+  if (!e.target.id) return;
+  stageDiv = document.getElementById(e.target.id);
+  if (activeStages.indexOf(e.target.id) == -1) {
+    stageDiv.classList.add("active");
+    activeStages.push(e.target.id);
+  } else {
+    stageDiv.classList.remove("active");
+    activeStages.splice(activeStages.indexOf(e.target.id), 1);
+  }
+  showFilteredEvents();
+};
+
+const menuHandler = (e) => {
+  const year = document.getElementById("current-year").innerHTML.trim();
+  const field = e.target.id;
+  if (["faq", "contact", "about"].indexOf(field) == -1) return;
+  url = `/${field}?year=${year}`;
   window.location.href = url;
 };
 
@@ -58,8 +125,7 @@ const sendMessageHandler = (e) => {
 
     request.open("POST", "/api/v1/contact", true);
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    request.onload = function () {
-      // do something to response
+    request.onload = () => {
       status.classList.add("valid");
       status.innerHTML = "The message have been sent.";
       console.log(this.responseText);
@@ -74,10 +140,13 @@ const sendMessageHandler = (e) => {
 
 document.getElementById("selYear").addEventListener("change", listHandler);
 
-const cont = document.getElementById("element-container");
-if (cont) cont.addEventListener("click", containerHandler);
+const cont_dates = document.getElementById("dates");
+if (cont_dates) cont_dates.addEventListener("click", datesHandler);
 
-document.getElementById("contact").addEventListener("click", contactHandler);
+const cont_stages = document.getElementById("stages");
+if (cont_stages) cont_stages.addEventListener("click", stagesHandler);
+
+document.getElementById("menu").addEventListener("click", menuHandler);
 
 const contactSubmit = document.getElementById("submit");
 if (contactSubmit) contactSubmit.addEventListener("click", sendMessageHandler);
